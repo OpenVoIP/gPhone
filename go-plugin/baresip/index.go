@@ -3,6 +3,7 @@ package baresip
 import (
 	"fmt"
 
+	baresip "github.com/OpenVoIP/baresip-go"
 	flutter "github.com/go-flutter-desktop/go-flutter"
 	"github.com/go-flutter-desktop/go-flutter/plugin"
 )
@@ -24,7 +25,7 @@ func (p *PluginInfo) InitPlugin(messenger plugin.BinaryMessenger) error {
 	//init
 	p.stop = make(chan bool, 1)
 
-	go Start()
+	go baresip.Start()
 
 	return nil // no error
 }
