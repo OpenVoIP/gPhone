@@ -3,8 +3,7 @@ import 'package:sip_ua/sip_ua.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterWidget extends StatefulWidget {
-  final SIPUAHelper _helper;
-  RegisterWidget(this._helper, {Key key}) : super(key: key);
+  RegisterWidget({Key key}) : super(key: key);
   @override
   _MyRegisterWidget createState() => _MyRegisterWidget();
 }
@@ -22,20 +21,18 @@ class _MyRegisterWidget extends State<RegisterWidget>
   SharedPreferences _preferences;
   RegistrationState _registerState;
 
-  SIPUAHelper get helper => widget._helper;
-
   @override
   initState() {
     super.initState();
-    _registerState = helper.registerState;
-    helper.addSipUaHelperListener(this);
+    // _registerState = helper.registerState;
+    // helper.addSipUaHelperListener(this);
     _loadSettings();
   }
 
   @override
   deactivate() {
     super.deactivate();
-    helper.removeSipUaHelperListener(this);
+    // helper.removeSipUaHelperListener(this);
     _saveSettings();
   }
 
@@ -96,7 +93,7 @@ class _MyRegisterWidget extends State<RegisterWidget>
     settings.password = _password;
     settings.displayName = _displayName;
     settings.webSocketExtraHeaders = _wsExtraHeaders;
-    helper.start(settings);
+    // helper.start(settings);
   }
 
   @override

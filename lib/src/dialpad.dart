@@ -1,28 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:gPhone/src/common/common.dart';
+import 'package:gPhone/src/common/eventbus.dart';
 import 'package:sip_ua/sip_ua.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'widgets/action_button.dart';
 
 class DialPadWidget extends StatefulWidget {
-  final SIPUAHelper _helper;
-  DialPadWidget(this._helper, {Key key}) : super(key: key);
+  DialPadWidget({Key key}) : super(key: key);
   @override
   _MyDialPadWidget createState() => _MyDialPadWidget();
 }
 
-class _MyDialPadWidget extends State<DialPadWidget>
-    implements SipUaHelperListener {
+class _MyDialPadWidget extends State<DialPadWidget> {
   String _dest;
-  SIPUAHelper get helper => widget._helper;
+  String status = "";
   TextEditingController _textController;
   SharedPreferences _preferences;
 
   @override
   initState() {
     super.initState();
-    _bindEventListeners();
     _loadSettings();
+    bus.on('call_data', (data) {
+      print("dialpad bus on data");
+      print(data);
+
+      setState(() {
+        status = data['type'];
+      });
+      if (status == 'CALL_INCOMING') {
+        Navigator.pushNamed(context, '/callscreen');
+      }
+    });
+  }
+
+  @override
+  deactivate() {
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    bus.off("call_data");
+    super.dispose();
   }
 
   void _loadSettings() async {
@@ -31,10 +52,6 @@ class _MyDialPadWidget extends State<DialPadWidget>
     _textController = TextEditingController(text: _dest);
     _textController.text = _dest;
     this.setState(() {});
-  }
-
-  void _bindEventListeners() {
-    helper.addSipUaHelperListener(this);
   }
 
   Widget _handleCall(BuildContext context, [bool voiceonly = false]) {
@@ -60,7 +77,8 @@ class _MyDialPadWidget extends State<DialPadWidget>
       );
       return null;
     }
-    helper.call(dest, voiceonly);
+
+    MethodChannelIns.invokeMethod('dial', dest);
     _preferences.setString('dest', dest);
     return null;
   }
@@ -177,61 +195,28 @@ class _MyDialPadWidget extends State<DialPadWidget>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Dart SIP UA Demo"),
-          actions: <Widget>[
-            PopupMenuButton<String>(
-                onSelected: (String value) {
-                  switch (value) {
-                    case 'account':
-                      Navigator.pushNamed(context, '/register');
-                      break;
-                    case 'about':
-                      Navigator.pushNamed(context, '/about');
-                      break;
-                    default:
-                      break;
-                  }
-                },
-                icon: Icon(Icons.menu),
-                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                      PopupMenuItem(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              child: Icon(
-                                Icons.account_circle,
-                                color: Colors.black38,
-                              ),
-                            ),
-                            SizedBox(
-                              child: Text('Account'),
-                              width: 64,
-                            )
-                          ],
-                        ),
-                        value: 'account',
-                      ),
-                      PopupMenuItem(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Icon(
-                              Icons.info,
-                              color: Colors.black38,
-                            ),
-                            SizedBox(
-                              child: Text('About'),
-                              width: 64,
-                            )
-                          ],
-                        ),
-                        value: 'about',
-                      )
-                    ]),
+        bottomNavigationBar: BottomNavigationBar(
+          // 底部导航
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+                icon: Icon(Icons.account_box), title: Text('帐号')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.dialpad), title: Text('拨号')),
+            BottomNavigationBarItem(icon: Icon(Icons.info), title: Text('关于')),
           ],
+          currentIndex: 1,
+          fixedColor: Colors.blue,
+          onTap: (value) {
+            switch (value) {
+              case 0:
+                Navigator.pushNamed(context, '/register');
+                break;
+              case 2:
+                Navigator.pushNamed(context, '/about');
+                break;
+              default:
+            }
+          },
         ),
         body: Align(
             alignment: Alignment(0, 0),
@@ -243,7 +228,7 @@ class _MyDialPadWidget extends State<DialPadWidget>
                     padding: const EdgeInsets.all(6.0),
                     child: Center(
                         child: Text(
-                      'Status: ${EnumHelper.getName(helper.registerState.state)}',
+                      status,
                       style: TextStyle(fontSize: 14, color: Colors.black54),
                     )),
                   ),
@@ -254,20 +239,5 @@ class _MyDialPadWidget extends State<DialPadWidget>
                     children: _buildDialPad(),
                   )),
                 ])));
-  }
-
-  @override
-  void registrationStateChanged(RegistrationState state) {
-    this.setState(() {});
-  }
-
-  @override
-  void transportStateChanged(TransportState state) {}
-
-  @override
-  void callStateChanged(CallState callState) {
-    if (callState.state == CallStateEnum.CALL_INITIATION) {
-      Navigator.pushNamed(context, '/callscreen');
-    }
   }
 }

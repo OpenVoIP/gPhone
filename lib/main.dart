@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart'
     show debugDefaultTargetPlatformOverride;
 
 import 'package:flutter/material.dart';
-import 'package:sip_ua/sip_ua.dart';
+import 'package:gPhone/src/common/common.dart';
 import 'package:flutter_webrtc/webrtc.dart';
+import 'package:gPhone/src/common/eventbus.dart';
 import 'src/register.dart';
 import 'src/dialpad.dart';
 import 'src/callscreen.dart';
@@ -14,23 +15,29 @@ void main() {
     debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
   }
   runApp(MyApp());
+  EventStream.receiveBroadcastStream().listen((data) {
+    print('EventStream get event');
+    print(data);
+
+    bus.emit("call_data", data);
+  });
 }
 
 class MyApp extends StatelessWidget {
-  final SIPUAHelper _helper = SIPUAHelper();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'SoftPhone',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Roboto',
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => DialPadWidget(_helper),
-        '/register': (context) => RegisterWidget(_helper),
-        '/callscreen': (context) => CallScreenWidget(_helper),
+        '/': (context) => DialPadWidget(),
+        '/register': (context) => RegisterWidget(),
+        '/callscreen': (context) => CallScreenWidget(),
         '/about': (context) => AboutWidget(),
       },
     );
