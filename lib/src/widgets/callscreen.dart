@@ -65,52 +65,47 @@ class _MyCallScreenWidget extends State<CallScreenWidget> {
   }
 
   Widget _buildContent() {
-    var stackWidgets = <Widget>[];
-    stackWidgets.addAll([
-      Positioned(
-        top: 48,
-        left: 0,
-        right: 0,
-        child: Center(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Center(
-                child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Text(
-                      ('VOICE CALL') +
-                          (_hold
-                              ? ' PAUSED BY ${this._holdOriginator.toUpperCase()}'
-                              : ''),
-                      style: TextStyle(fontSize: 24, color: Colors.black54),
-                    ))),
-            Center(
-                child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Text(
-                      '1000',
-                      style: TextStyle(fontSize: 18, color: Colors.black54),
-                    ))),
-            Center(
-                child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Text(_timeLabel,
-                        style: TextStyle(fontSize: 14, color: Colors.black54))))
-          ],
-        )),
-      ),
-    ]);
+    var widgets = <Widget>[];
+    widgets.add(
+      Center(
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Center(
+              child: Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: Text(
+                    ('VOICE CALL') +
+                        (_hold
+                            ? ' PAUSED BY ${this._holdOriginator.toUpperCase()}'
+                            : ''),
+                    style: TextStyle(fontSize: 24, color: Colors.black54),
+                  ))),
+          Center(
+              child: Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: Text(
+                    '1000',
+                    style: TextStyle(fontSize: 18, color: Colors.black54),
+                  ))),
+          Center(
+              child: Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: Text(_timeLabel,
+                      style: TextStyle(fontSize: 14, color: Colors.black54))))
+        ],
+      )),
+    );
 
-    stackWidgets.add(ActionButtons(
+    widgets.add(ActionButtons(
       timerCancel: () {
         this._timer.cancel();
       },
     ));
 
     return Column(
-      children: stackWidgets,
+      children: widgets,
     );
   }
 

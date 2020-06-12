@@ -18,6 +18,7 @@ class _MyDialPadWidget extends State<DialPadWidget> {
   initState() {
     super.initState();
     EventStream.receiveBroadcastStream().listen((data) {
+      print(data);
       switch (data['type']) {
         case 'CALL_REMOTE_SDP':
         case 'CALL_LOCAL_SDP':

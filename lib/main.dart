@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart'
-    show debugDefaultTargetPlatformOverride;
 import 'package:gPhone/src/common/event.dart';
 
 import 'package:provider/provider.dart';
@@ -9,9 +7,6 @@ import 'src/dialpad.dart';
 import 'src/about.dart';
 
 void main() {
-  // if (WebRTC.platformIsDesktop) {
-  debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
-  // }
   runApp(MyApp());
 }
 
