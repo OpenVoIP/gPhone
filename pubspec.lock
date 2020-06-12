@@ -36,20 +36,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.14.12"
-  convert:
-    dependency: transitive
-    description:
-      name: convert
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.1.1"
-  crypto:
-    dependency: transitive
-    description:
-      name: crypto
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.1.5"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -79,34 +65,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_webrtc:
-    dependency: transitive
-    description:
-      name: flutter_webrtc
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.2.8"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.16.1"
-  lists:
-    dependency: transitive
-    description:
-      name: lists
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.1.6"
-  logger:
-    dependency: transitive
-    description:
-      name: logger
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.7.0+2"
   matcher:
     dependency: transitive
     description:
@@ -121,13 +79,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.8"
-  parser_error:
+  nested:
     dependency: transitive
     description:
-      name: parser_error
+      name: nested
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.1"
+    version: "0.0.4"
   path:
     dependency: transitive
     description:
@@ -135,27 +93,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.7.0"
-  random_string:
-    dependency: transitive
+  provider:
+    dependency: "direct main"
     description:
-      name: random_string
+      name: provider
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.1.0"
-  recase:
-    dependency: transitive
-    description:
-      name: recase
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.0.1"
-  sdp_transform:
-    dependency: transitive
-    description:
-      name: sdp_transform
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.2.0"
+    version: "4.1.3"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -184,13 +128,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.1.2+7"
-  sip_ua:
-    dependency: "direct main"
-    description:
-      name: sip_ua
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -238,13 +175,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.16"
-  text:
-    dependency: transitive
-    description:
-      name: text
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.1.1"
   typed_data:
     dependency: transitive
     description:
@@ -252,13 +182,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.6"
-  uuid:
-    dependency: transitive
-    description:
-      name: uuid
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.0.4"
   vector_math:
     dependency: transitive
     description:
@@ -268,4 +191,4 @@ packages:
     version: "2.0.8"
 sdks:
   dart: ">=2.7.0 <3.0.0"
-  flutter: ">=1.12.13+hotfix.5 <2.0.0"
+  flutter: ">=1.16.0 <2.0.0"

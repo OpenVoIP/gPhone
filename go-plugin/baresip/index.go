@@ -40,6 +40,7 @@ func (p *PluginInfo) InitPlugin(messenger plugin.BinaryMessenger) error {
 
 // scan 处理
 func (p *PluginInfo) hangup(arguments interface{}) (reply interface{}, err error) {
+	fmt.Print("hangup")
 	binding.UAHangup()
 	return nil, nil
 }
@@ -59,13 +60,12 @@ func (p *PluginInfo) answer(arguments interface{}) (reply interface{}, err error
 //OnListen listen
 func (p *PluginInfo) OnListen(arguments interface{}, sink *plugin.EventSink) {
 	time.AfterFunc(3*time.Second, func() {
-		fmt.Println("建立 tcp 连接")
+		// fmt.Println("建立 tcp 连接")
 		go ctrltcp.GetConn()
 	})
 	time.AfterFunc(8*time.Second, func() {
-		fmt.Println("处理 tcp 数据")
 		go ctrltcp.EventHandle(func(info ctrltcp.EventInfo) {
-			fmt.Printf("处理 tcp 数据 %+v\n", info)
+			// fmt.Printf("处理 tcp 数据 %+v\n", info)
 			data := map[interface{}]interface{}{
 				"type":            info.Type,
 				"direction":       info.Direction,

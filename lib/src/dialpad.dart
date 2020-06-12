@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gPhone/src/widgets/callscreen.dart';
 import 'package:gPhone/src/common/common.dart';
-import 'package:gPhone/src/common/eventbus.dart';
-import 'package:sip_ua/sip_ua.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'widgets/action_button.dart';
+import 'package:gPhone/src/common/event.dart';
+import 'package:gPhone/src/widgets/pad.dart';
+import 'package:provider/provider.dart';
 
 class DialPadWidget extends StatefulWidget {
   DialPadWidget({Key key}) : super(key: key);
@@ -13,183 +12,26 @@ class DialPadWidget extends StatefulWidget {
 }
 
 class _MyDialPadWidget extends State<DialPadWidget> {
-  String _dest;
   String status = "";
-  TextEditingController _textController;
-  SharedPreferences _preferences;
 
   @override
   initState() {
     super.initState();
-    _loadSettings();
-    bus.on('call_data', (data) {
-      print("dialpad bus on data");
-      print(data);
-
+    EventStream.receiveBroadcastStream().listen((data) {
+      switch (data['type']) {
+        case 'CALL_REMOTE_SDP':
+        case 'CALL_LOCAL_SDP':
+        case 'CALL_RTPESTAB':
+        case 'CALL_RTCP':
+          return;
+        default:
+      }
       setState(() {
         status = data['type'];
       });
-      if (status == 'CALL_INCOMING') {
-        Navigator.pushNamed(context, '/callscreen');
-      }
+
+      Provider.of<EventInfo>(context, listen: false).update(data);
     });
-  }
-
-  @override
-  deactivate() {
-    super.deactivate();
-  }
-
-  @override
-  void dispose() {
-    bus.off("call_data");
-    super.dispose();
-  }
-
-  void _loadSettings() async {
-    _preferences = await SharedPreferences.getInstance();
-    _dest = _preferences.getString('dest') ?? 'sip:xxx@www.com';
-    _textController = TextEditingController(text: _dest);
-    _textController.text = _dest;
-    this.setState(() {});
-  }
-
-  Widget _handleCall(BuildContext context, [bool voiceonly = false]) {
-    var dest = _textController.text;
-    if (dest == null || dest.isEmpty) {
-      showDialog<Null>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Target is empty.'),
-            content: Text('Please enter a SIP URI or username!'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Ok'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-      return null;
-    }
-
-    MethodChannelIns.invokeMethod('dial', dest);
-    _preferences.setString('dest', dest);
-    return null;
-  }
-
-  void _handleBackSpace([bool deleteAll = false]) {
-    var text = _textController.text;
-    if (text.isNotEmpty) {
-      this.setState(() {
-        text = deleteAll ? '' : text.substring(0, text.length - 1);
-        _textController.text = text;
-      });
-    }
-  }
-
-  void _handleNum(String number) {
-    this.setState(() {
-      _textController.text += number;
-    });
-  }
-
-  List<Widget> _buildNumPad() {
-    var lables = [
-      [
-        {'1': ''},
-        {'2': 'abc'},
-        {'3': 'def'}
-      ],
-      [
-        {'4': 'ghi'},
-        {'5': 'jkl'},
-        {'6': 'mno'}
-      ],
-      [
-        {'7': 'pqrs'},
-        {'8': 'tuv'},
-        {'9': 'wxyz'}
-      ],
-      [
-        {'*': ''},
-        {'0': '+'},
-        {'#': ''}
-      ],
-    ];
-
-    return lables
-        .map((row) => Padding(
-            padding: const EdgeInsets.all(12),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: row
-                    .map((label) => ActionButton(
-                          title: '${label.keys.first}',
-                          subTitle: '${label.values.first}',
-                          onPressed: () => _handleNum(label.keys.first),
-                          number: true,
-                        ))
-                    .toList())))
-        .toList();
-  }
-
-  List<Widget> _buildDialPad() {
-    return [
-      Container(
-          width: 360,
-          child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                    width: 360,
-                    child: TextField(
-                      keyboardType: TextInputType.text,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 24, color: Colors.black54),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      controller: _textController,
-                    )),
-              ])),
-      Container(
-          width: 300,
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: _buildNumPad())),
-      Container(
-          width: 300,
-          child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  ActionButton(
-                    icon: Icons.videocam,
-                    onPressed: () => _handleCall(context),
-                  ),
-                  ActionButton(
-                    icon: Icons.dialer_sip,
-                    fillColor: Colors.green,
-                    onPressed: () => _handleCall(context, true),
-                  ),
-                  ActionButton(
-                    icon: Icons.keyboard_arrow_left,
-                    onPressed: () => _handleBackSpace(),
-                    onLongPress: () => _handleBackSpace(true),
-                  ),
-                ],
-              )))
-    ];
   }
 
   @override
@@ -222,22 +64,11 @@ class _MyDialPadWidget extends State<DialPadWidget> {
             alignment: Alignment(0, 0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: Center(
-                        child: Text(
-                      status,
-                      style: TextStyle(fontSize: 14, color: Colors.black54),
-                    )),
-                  ),
-                  Container(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: _buildDialPad(),
-                  )),
+                  if (showCallScreen(status))
+                    Container(child: CallScreenWidget()),
+                  if (!showCallScreen(status)) Container(child: Pad()),
                 ])));
   }
 }

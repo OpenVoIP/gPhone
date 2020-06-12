@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sip_ua/sip_ua.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -8,8 +7,7 @@ class RegisterWidget extends StatefulWidget {
   _MyRegisterWidget createState() => _MyRegisterWidget();
 }
 
-class _MyRegisterWidget extends State<RegisterWidget>
-    implements SipUaHelperListener {
+class _MyRegisterWidget extends State<RegisterWidget> {
   String _password;
   String _sipUri;
   String _displayName;
@@ -19,7 +17,6 @@ class _MyRegisterWidget extends State<RegisterWidget>
     'Host': 'tryit.jssip.net:10443'
   };
   SharedPreferences _preferences;
-  RegistrationState _registerState;
 
   @override
   initState() {
@@ -48,17 +45,10 @@ class _MyRegisterWidget extends State<RegisterWidget>
   }
 
   void _saveSettings() {
-    _preferences.setString('sip_uri', _sipUri);
-    _preferences.setString('display_name', _displayName);
-    _preferences.setString('password', _password);
-    _preferences.setString('auth_user', _authorizationUser);
-  }
-
-  @override
-  void registrationStateChanged(RegistrationState state) {
-    this.setState(() {
-      _registerState = state;
-    });
+    // _preferences.setString('sip_uri', _sipUri);
+    // _preferences.setString('display_name', _displayName);
+    // _preferences.setString('password', _password);
+    // _preferences.setString('auth_user', _authorizationUser);
   }
 
   void _alert(BuildContext context, String alertFieldName) {
@@ -87,12 +77,12 @@ class _MyRegisterWidget extends State<RegisterWidget>
       _alert(context, "SIP URI");
     }
 
-    UaSettings settings = UaSettings();
-    settings.uri = _sipUri;
-    settings.authorizationUser = _authorizationUser;
-    settings.password = _password;
-    settings.displayName = _displayName;
-    settings.webSocketExtraHeaders = _wsExtraHeaders;
+    // UaSettings settings = UaSettings();
+    // settings.uri = _sipUri;
+    // settings.authorizationUser = _authorizationUser;
+    // settings.password = _password;
+    // settings.displayName = _displayName;
+    // settings.webSocketExtraHeaders = _wsExtraHeaders;
     // helper.start(settings);
   }
 
@@ -242,12 +232,4 @@ class _MyRegisterWidget extends State<RegisterWidget>
                       ))
                 ])));
   }
-
-  @override
-  void callStateChanged(CallState state) {
-    //NO OP
-  }
-
-  @override
-  void transportStateChanged(TransportState state) {}
 }
