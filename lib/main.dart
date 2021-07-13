@@ -1,3 +1,8 @@
+import 'dart:io';
+import 'dart:isolate';
+
+import 'package:desktop_window/desktop_window.dart';
+import 'package:gPhone/src/common/call.dart';
 import 'package:gPhone/src/common/event.dart';
 
 import 'package:provider/provider.dart';
@@ -6,7 +11,22 @@ import 'src/register.dart';
 import 'src/dialpad.dart';
 import 'src/about.dart';
 
+void newThread(String value) {
+  startApp();
+}
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    DesktopWindow.setWindowSize(Size(380, 600));
+  }
+
+  print("dart start_app");
+  Isolate.spawn(
+    newThread,
+    "",
+  );
+
   runApp(MyApp());
 }
 

@@ -23,7 +23,7 @@ class _ActionButtonsState extends State<ActionButtons> {
   String _tansfer_target;
 
   void _handleAccept() {
-    MethodChannelIns.invokeMethod('answer');
+    // MethodChannelIns.invokeMethod('answer');
   }
 
   void _handleKeyPad() {
@@ -114,7 +114,7 @@ class _ActionButtonsState extends State<ActionButtons> {
     var hangupBtn = ActionButton(
       title: "hangup",
       onPressed: () {
-        MethodChannelIns.invokeMethod('hangup');
+        // MethodChannelIns.invokeMethod('hangup');
         widget.timerCancel();
       },
       icon: Icons.call_end,

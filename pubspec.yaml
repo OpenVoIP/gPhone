@@ -32,6 +32,8 @@ dependencies:
   shared_preferences: ^0.5.6
   shared_preferences_macos: ^0.0.1
   shared_preferences_web: ^0.1.0
+  ffi: ^1.1.2
+  desktop_window: ^0.4.0
 
 dev_dependencies:
   flutter_test:

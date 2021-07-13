@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:gPhone/src/widgets/action_button.dart';
-
-const EventStream = const EventChannel('tqcenglish.flutter.dev/baresip-event');
-const MethodChannelIns =
-    const MethodChannel('tqcenglish.flutter.dev/baresip-method');
 
 List<Widget> buildNumPad(handle) {
   var lables = [

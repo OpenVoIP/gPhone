@@ -17,22 +17,23 @@ class _MyDialPadWidget extends State<DialPadWidget> {
   @override
   initState() {
     super.initState();
-    EventStream.receiveBroadcastStream().listen((data) {
-      print(data);
-      switch (data['type']) {
-        case 'CALL_REMOTE_SDP':
-        case 'CALL_LOCAL_SDP':
-        case 'CALL_RTPESTAB':
-        case 'CALL_RTCP':
-          return;
-        default:
-      }
-      setState(() {
-        status = data['type'];
-      });
+    // 监听 ffi
+    // EventStream.receiveBroadcastStream().listen((data) {
+    //   print(data);
+    //   switch (data['type']) {
+    //     case 'CALL_REMOTE_SDP':
+    //     case 'CALL_LOCAL_SDP':
+    //     case 'CALL_RTPESTAB':
+    //     case 'CALL_RTCP':
+    //       return;
+    //     default:
+    //   }
+    //   setState(() {
+    //     status = data['type'];
+    //   });
 
-      Provider.of<EventInfo>(context, listen: false).update(data);
-    });
+    //   Provider.of<EventInfo>(context, listen: false).update(data);
+    // });
   }
 
   @override
@@ -41,11 +42,9 @@ class _MyDialPadWidget extends State<DialPadWidget> {
         bottomNavigationBar: BottomNavigationBar(
           // 底部导航
           items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_box), title: Text('帐号')),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.dialpad), title: Text('拨号')),
-            BottomNavigationBarItem(icon: Icon(Icons.info), title: Text('关于')),
+            BottomNavigationBarItem(icon: Icon(Icons.account_box), label: '帐号'),
+            BottomNavigationBarItem(icon: Icon(Icons.dialpad), label: '拨号'),
+            BottomNavigationBarItem(icon: Icon(Icons.info), label: '关于'),
           ],
           currentIndex: 1,
           fixedColor: Colors.blue,

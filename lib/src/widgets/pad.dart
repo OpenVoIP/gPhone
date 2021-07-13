@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gPhone/src/common/call.dart';
 import 'package:gPhone/src/common/common.dart';
 import 'package:gPhone/src/widgets/action_button.dart';
+import 'package:ffi/ffi.dart';
 
 class Pad extends StatefulWidget {
   Pad({Key key}) : super(key: key);
@@ -53,8 +55,10 @@ class _PadState extends State<Pad> {
       );
       return null;
     }
-
-    MethodChannelIns.invokeMethod('dial', dest);
+    // 拨打
+    // MethodChannelIns.invokeMethod('dial', dest);
+    print("callApp");
+    callApp(dest.toNativeUtf8());
     return null;
   }
 
@@ -65,13 +69,13 @@ class _PadState extends State<Pad> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-            width: 360,
+            width: 300,
             child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                      width: 360,
+                      width: 300,
                       child: TextField(
                         keyboardType: TextInputType.text,
                         textAlign: TextAlign.center,
