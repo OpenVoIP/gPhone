@@ -26,9 +26,21 @@
 		33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F22044A3C60003C045 /* Assets.xcassets */; };
 		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
 		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
+		B72D67FA269DBE3800897455 /* libre.a in Resources */ = {isa = PBXBuildFile; fileRef = B7C0899C269C5F850041A192 /* libre.a */; };
+		B72D67FB269DBE3B00897455 /* librem.a in Resources */ = {isa = PBXBuildFile; fileRef = B7C0899D269C5F850041A192 /* librem.a */; };
+		B72D6803269DBF1D00897455 /* libbaresip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B72D6802269DBF1D00897455 /* libbaresip.a */; };
+		B72D6804269DBF2B00897455 /* libbaresip.a in Resources */ = {isa = PBXBuildFile; fileRef = B72D6802269DBF1D00897455 /* libbaresip.a */; };
+		B72D6806269DBFEC00897455 /* librem.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B72D6805269DBFEC00897455 /* librem.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
+		B72D6807269DC00300897455 /* librem.dylib in Resources */ = {isa = PBXBuildFile; fileRef = B72D6805269DBFEC00897455 /* librem.dylib */; };
+		B72D6808269DC00F00897455 /* librem.dylib in Bundle Framework */ = {isa = PBXBuildFile; fileRef = B72D6805269DBFEC00897455 /* librem.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B72D680A269DC08400897455 /* libre.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B72D6809269DC08400897455 /* libre.dylib */; };
+		B72D680C269DC09400897455 /* libbaresip.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B72D680B269DC09400897455 /* libbaresip.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
+		B72D680D269DC0AA00897455 /* libbaresip.dylib in Resources */ = {isa = PBXBuildFile; fileRef = B72D680B269DC09400897455 /* libbaresip.dylib */; };
+		B72D680E269DC0AD00897455 /* libre.dylib in Resources */ = {isa = PBXBuildFile; fileRef = B72D6809269DC08400897455 /* libre.dylib */; };
+		B72D680F269DC0BA00897455 /* libre.dylib in Bundle Framework */ = {isa = PBXBuildFile; fileRef = B72D6809269DC08400897455 /* libre.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B72D6810269DC0BB00897455 /* libbaresip.dylib in Bundle Framework */ = {isa = PBXBuildFile; fileRef = B72D680B269DC09400897455 /* libbaresip.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B7C0899F269C5F850041A192 /* libre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C0899C269C5F850041A192 /* libre.a */; };
 		B7C089A0269C5F850041A192 /* librem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C0899D269C5F850041A192 /* librem.a */; };
-		B7C089A5269C64C70041A192 /* libbaresip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C089A4269C64C70041A192 /* libbaresip.a */; };
 		C6E69DD79EEFF780C7B216B9 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFF9CC1E6F861B018D7D0DEC /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +61,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B72D6808269DC00F00897455 /* librem.dylib in Bundle Framework */,
+				B72D6810269DC0BB00897455 /* libbaresip.dylib in Bundle Framework */,
+				B72D680F269DC0BA00897455 /* libre.dylib in Bundle Framework */,
 			);
 			name = "Bundle Framework";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,9 +88,12 @@
 		33E5194F232828860026EE4D /* AppInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppInfo.xcconfig; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		B72D6802269DBF1D00897455 /* libbaresip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaresip.a; sourceTree = "<group>"; };
+		B72D6805269DBFEC00897455 /* librem.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = librem.dylib; sourceTree = "<group>"; };
+		B72D6809269DC08400897455 /* libre.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libre.dylib; sourceTree = "<group>"; };
+		B72D680B269DC09400897455 /* libbaresip.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libbaresip.dylib; sourceTree = "<group>"; };
 		B7C0899C269C5F850041A192 /* libre.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libre.a; sourceTree = "<group>"; };
 		B7C0899D269C5F850041A192 /* librem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librem.a; sourceTree = "<group>"; };
-		B7C089A4269C64C70041A192 /* libbaresip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbaresip.a; path = ../../../../../Downloads/libbaresip.a; sourceTree = "<group>"; };
 		D2C27C1667895FF8F5D73A70 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		E8E14A930D31FCD6C45EA4D5 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		FFF9CC1E6F861B018D7D0DEC /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,10 +104,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7C089A5269C64C70041A192 /* libbaresip.a in Frameworks */,
+				B72D6803269DBF1D00897455 /* libbaresip.a in Frameworks */,
 				B7C0899F269C5F850041A192 /* libre.a in Frameworks */,
 				C6E69DD79EEFF780C7B216B9 /* Pods_Runner.framework in Frameworks */,
 				B7C089A0269C5F850041A192 /* librem.a in Frameworks */,
+				B72D680A269DC08400897455 /* libre.dylib in Frameworks */,
+				B72D6806269DBFEC00897455 /* librem.dylib in Frameworks */,
+				B72D680C269DC09400897455 /* libbaresip.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +195,10 @@
 		D73912EC22F37F3D000D13A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B7C089A4269C64C70041A192 /* libbaresip.a */,
+				B72D680B269DC09400897455 /* libbaresip.dylib */,
+				B72D6805269DBFEC00897455 /* librem.dylib */,
+				B72D6809269DC08400897455 /* libre.dylib */,
+				B72D6802269DBF1D00897455 /* libbaresip.a */,
 				B7C0899C269C5F850041A192 /* libre.a */,
 				B7C0899D269C5F850041A192 /* librem.a */,
 				FFF9CC1E6F861B018D7D0DEC /* Pods_Runner.framework */,
@@ -258,6 +282,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */,
+				B72D67FB269DBE3B00897455 /* librem.a in Resources */,
+				B72D6804269DBF2B00897455 /* libbaresip.a in Resources */,
+				B72D67FA269DBE3800897455 /* libre.a in Resources */,
+				B72D680D269DC0AA00897455 /* libbaresip.dylib in Resources */,
+				B72D680E269DC0AD00897455 /* libre.dylib in Resources */,
+				B72D6807269DC00300897455 /* librem.dylib in Resources */,
 				33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
